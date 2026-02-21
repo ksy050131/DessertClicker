@@ -74,3 +74,5 @@ crashlytics-build.properties
 # MCP 서버 (필요시 주석 해제)
 # ============================================
 # /McpServer/
+
+COMMIT_RULES.md
