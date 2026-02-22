@@ -61,14 +61,21 @@ public class UpgradeManager : MonoBehaviour
     /// <summary>
     /// 씬에서 UpgradeSlot 오브젝트를 자동으로 찾아 연결합니다.
     /// </summary>
-    private void AutoFindSlots()
+private void AutoFindSlots()
     {
         upgradeSlots = new UpgradeSlotUI[upgrades.Length];
+        
+        // ScrollArea/Viewport/UpgradeContent 안에서 슬롯 탐색
+        Transform contentPanel = transform.Find("ScrollArea/Viewport/UpgradeContent");
+        if (contentPanel == null) contentPanel = transform.Find("ScrollArea/UpgradeContent");
+        if (contentPanel == null) contentPanel = transform.Find("UpgradeContent");
+        Transform searchRoot = contentPanel != null ? contentPanel : transform;
+        
         for (int i = 0; i < upgrades.Length; i++)
         {
             upgradeSlots[i] = new UpgradeSlotUI();
             
-            Transform slotTransform = transform.Find($"UpgradeSlot_{i}");
+            Transform slotTransform = searchRoot.Find($"UpgradeSlot_{i}");
             if (slotTransform == null) continue;
 
             Transform nameT = slotTransform.Find("UpgradeName");
