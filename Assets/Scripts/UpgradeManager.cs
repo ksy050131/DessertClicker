@@ -34,6 +34,7 @@ public class UpgradeManager : MonoBehaviour
     public class UpgradeSlotUI
     {
         public TMP_Text nameText;
+        public TMP_Text descText;
         public TMP_Text costText;
         public Button buyButton;
     }
@@ -80,6 +81,9 @@ private void AutoFindSlots()
 
             Transform nameT = slotTransform.Find("UpgradeName");
             if (nameT != null) upgradeSlots[i].nameText = nameT.GetComponent<TMP_Text>();
+
+            Transform descT = slotTransform.Find("UpgradeDesc");
+            if (descT != null) upgradeSlots[i].descText = descT.GetComponent<TMP_Text>();
 
             Transform costT = slotTransform.Find("UpgradeCost");
             if (costT != null) upgradeSlots[i].costText = costT.GetComponent<TMP_Text>();
@@ -135,6 +139,10 @@ private void AutoFindSlots()
             if (slot.nameText != null)
             {
                 slot.nameText.text = $"{data.upgradeName} (Lv.{data.purchaseCount})";
+            }
+            if (slot.descText != null)
+            {
+                slot.descText.text = data.description;
             }
             if (slot.costText != null)
             {
